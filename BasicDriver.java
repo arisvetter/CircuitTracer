@@ -16,9 +16,9 @@ public class BasicDriver {
        // try {
 
             String[] argsFake = new String[3];
-            argsFake[0] = "-s";
+            argsFake[0] = "-q";
             argsFake[1] = "-c";
-            argsFake[2] = "valid1.dat";
+            argsFake[2] = "invalid1.dat";
             
 
             

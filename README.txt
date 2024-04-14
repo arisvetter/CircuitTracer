@@ -1,0 +1,1 @@
+//one error was using != vs .equals()... saw by adding outprint statements before each time printUsage was called... helped me from failing the last 4 tests of valid and invalid 1 when inputs werent given as strings

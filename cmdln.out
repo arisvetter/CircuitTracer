@@ -1,1 +1,7 @@
-Usage instructions: bhjlnjilk
+Usage: $ java CircuitTracer <-s | -q> <-c | -g> filename
+		where	-q is queue storage
+			-s is stack storage
+			-c is console output
+			-g is GUI output
+
+1
