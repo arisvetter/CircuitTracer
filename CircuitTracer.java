@@ -53,14 +53,17 @@ public class CircuitTracer {
 			printUsage();
 			return; //exit the constructor immediately
 		}
+		//the only two acceptable first arguments
 		if(args[0] != "-s" && args[0] != "-p"){
 			printUsage();
 			return;
 		}
+		//the only two acceptable second arguments
 		if(args[1] != "-c" && args[1] != "-g"){
 			printUsage();
 			return;
 		}
+		//initializes empty stateStore (stack or queue) based on first argument
 		Storage<TraceState> stateStore;
 		if(args[0].equals("-s")){
 			stateStore = new Storage<TraceState>(Storage.DataStructure.stack);
@@ -71,7 +74,7 @@ public class CircuitTracer {
 		CircuitBoard myBoard = null;
 		try {
 			myBoard = new CircuitBoard(args[2]);
-			System.out.println("Tester: Success");
+			//System.out.println("Tester: Success");
 
 		} catch (FileNotFoundException e){
 			System.out.println(e.toString());
@@ -84,29 +87,42 @@ public class CircuitTracer {
 		//List<TraceState> bestPaths = new List<TraceState>();
 		ArrayList<TraceState> bestPaths = new ArrayList<TraceState>();
 		
-		//how to get this to specifically be tracestate
+		//add the initial traceStates (with just one trace) to stateStore
 		Point startPoint = myBoard.getStartingPoint();
-		
+		int currX = (int)startPoint.getX();
+		int currY = (int)startPoint.getY();
+		if (myBoard.isOpen(currX, currY - 1)){
+			stateStore.store(new TraceState(myBoard, currX, currY - 1));
+		}
+		if (myBoard.isOpen(currX, currY + 1)){
+			stateStore.store(new TraceState(myBoard, currX, currY + 1));
+		}
+		if (myBoard.isOpen(currX + 1, currY)){
+			stateStore.store(new TraceState(myBoard, currX + 1, currY));
+		}
+		if (myBoard.isOpen(currX - 1, currY - 1)){
+			stateStore.store(new TraceState(myBoard, currX - 1, currY));
+		}
+
+
 		//TraceState initialTraceState = new TraceState(myBoard, (int)startPoint.getX(), (int)startPoint.getY()); 
-		for(int i = (int)startPoint.getX() - 1; i <  (int)startPoint.getX() + 2; i++){
-			for(int k = (int)startPoint.getY() - 1; i < (int)startPoint.getY() + 2; i++){
+		/*for(int i = (int)startPoint.getX() - 1; i <  (int)startPoint.getX() + 1; i++){
+			for(int k = (int)startPoint.getY() - 1; i < (int)startPoint.getY() + 1; i++){
 				if (myBoard.isOpen(i,k)){
 					TraceState addState = new TraceState(myBoard, i, k);
 				stateStore.store(addState);
 				}
 				
 			}
-		}
+		}*/
 
 		while (!stateStore.isEmpty()){
 			TraceState currentState = stateStore.retrieve();
 			if(currentState.isSolution()){
-				int shortestPath;
+				int shortestPath = 0;
 				if (!bestPaths.isEmpty()){
 					shortestPath = bestPaths.get(0).pathLength();
-				} else {
-					shortestPath = 0;
-				}
+				} 
 				
 				if(bestPaths.size() == 0 || shortestPath == currentState.pathLength()){
 					bestPaths.add(currentState);
@@ -118,14 +134,29 @@ public class CircuitTracer {
 				else {
 					//currentState.getRow should instead be most recent T
 					//got error when i changed row and col ti match
-					for(int i = (int)currentState.getRow() - 1; i <  currentState.getRow() + 2; i++){
+					/*for(int i = (int)currentState.getRow() - 1; i <  currentState.getRow() + 2; i++){
 						for(int k = (int)currentState.getCol() - 1; i < (int)currentState.getCol() + 2; i++){
 							if(currentState.isOpen(i,k)){
 								TraceState addState = new TraceState(currentState, i, k);
 								stateStore.store(addState);
 							}
 						}
+					}*/
+					currX = (int)currentState.getRow();
+					currY = (int)currentState.getCol();
+					if (myBoard.isOpen(currX, currY - 1)){
+						stateStore.store(new TraceState(currentState, currX, currY - 1));
 					}
+					if (myBoard.isOpen(currX, currY + 1)){
+						stateStore.store(new TraceState(currentState, currX, currY + 1));
+					}
+					if (myBoard.isOpen(currX + 1, currY)){
+						stateStore.store(new TraceState(currentState, currX + 1, currY));
+					}
+					if (myBoard.isOpen(currX - 1, currY - 1)){
+						stateStore.store(new TraceState(currentState, currX - 1, currY));
+					}
+
 				}
 			
 		}
@@ -137,8 +168,8 @@ public class CircuitTracer {
 			}
 
 		} else {
-			//System.out.println("GUI option is currently unavailable. Please try again");
-			JFrame mainFrame = new JFrame();
+			System.out.println("GUI option is currently unavailable.");
+			/*JFrame mainFrame = new JFrame();
 			JPanel mainPanel = new JPanel();
 			mainPanel.setLayout(new BorderLayout());
 			JPanel solutionOptions = new JPanel();
@@ -162,7 +193,7 @@ public class CircuitTracer {
 			}
 			mainPanel.add(gridPanel, BorderLayout.WEST);
 			mainPanel.add(solutionOptions, BorderLayout.EAST);
-			mainFrame.setVisible(true);
+			mainFrame.setVisible(true);*/
 
 		}
 		/* 

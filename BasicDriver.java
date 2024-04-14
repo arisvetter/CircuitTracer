@@ -12,12 +12,12 @@ public class BasicDriver {
 
     public static void main(String[] args) {
 
-        /* 
-        try {
+        
+       // try {
 
             String[] argsFake = new String[3];
             argsFake[0] = "-s";
-            argsFake[1] = "-g";
+            argsFake[1] = "-c";
             argsFake[2] = "valid1.dat";
             
 
@@ -29,8 +29,8 @@ public class BasicDriver {
         //    System.out.println(hello.toString());
         //}// catch (FileNotFoundException e) {
         //    System.out.println("error");
-       // }*/
-            try {
+       // }
+           /*  try {
             CircuitBoard myBoard = new CircuitBoard("valid1.dat");
             JFrame mainFrame = new JFrame();
 			JPanel mainPanel = new JPanel();
@@ -64,7 +64,7 @@ public class BasicDriver {
 			mainPanel.add(gridPanel, BorderLayout.WEST);
 			mainPanel.add(solutionOptions, BorderLayout.EAST);
 			mainFrame.setVisible(true);
-        } catch (FileNotFoundException e){}
+        } catch (FileNotFoundException e){}*/
     }
 
 }

@@ -62,7 +62,7 @@ public class CircuitBoard {
 			throw new InvalidFileFormatException("First line of file must contain two integers");
 		}
 
-		if (ROWS < 0 || COLS < 0) {
+		if (ROWS <= 0 || COLS <= 0) {
 			throw new InvalidFileFormatException("Invalid row or column sizes");
 		}
 
