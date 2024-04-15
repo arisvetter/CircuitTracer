@@ -17,12 +17,14 @@ public class BasicDriver {
 
             String[] argsFake = new String[3];
             argsFake[0] = "-q";
-            argsFake[1] = "-c";
-            argsFake[2] = "invalid1.dat";
+            argsFake[1] = "-g";
+            argsFake[2] = "valid1.dat";
             
 
             
             CircuitTracer myTracer = new CircuitTracer(argsFake);
+
+            //CircuitTracerGUI myGUI = new CircuitTracer()
 
             //CircuitBoard hello = new CircuitBoard("boards/validFile.txt");
 

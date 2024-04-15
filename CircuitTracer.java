@@ -175,7 +175,8 @@ public class CircuitTracer {
 			}
 
 		} else {
-			System.out.println("GUI option is currently unavailable.");
+			//System.out.println("GUI option is currently unavailable.");
+			CircuitTracerGUI myGUI = new CircuitTracerGUI(myBoard, bestPaths);
 			/*JFrame mainFrame = new JFrame();
 			JPanel mainPanel = new JPanel();
 			mainPanel.setLayout(new BorderLayout());
